@@ -1,18 +1,16 @@
-import { Outlet } from "react-router-dom"
-import AppTitle from "./AppTitle"
-import Navs from "./Navs"
+import { Outlet } from 'react-router-dom';
+import AppTitle from './AppTitle';
+import Navs from './Navs';
 
 const MainLayout = () => {
-return (
+  return (
     <div>
-        This is shared markup
-        <Navs/>
-
-        <AppTitle/>
-        <Outlet/>
+      This is shared markup
+      <Navs />
+      <AppTitle />
+      <Outlet />
     </div>
-)
+  );
+};
 
-}
-
-export default MainLayout
+export default MainLayout;

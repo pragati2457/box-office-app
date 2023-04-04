@@ -1,51 +1,56 @@
-import { useState } from "react";
-import { searchForShows } from "./../API/tvmaze";
+import { useState } from 'react';
+import { searchForShows, searchForPeople} from './../API/tvmaze';
+import SearchForm from '../componnts/SearchForm';
+import ShowGrid from '../componnts/Shows/ShowGrid';
+import ActorGrid from '../componnts/Actors/ActorGrid';
 
 const Home = () => {
-    const [ searchStr, setSearchStr] = useState("");
-    const [apiData, setApiData]= useState(null);
-    const [apiDataError, setApiDataError] = useState(null);
+  const [apiData, setApiData] = useState(null);
+  const [apiDataError, setApiDataError] = useState(null);
+  
 
-    const onSearchInputChange = (ev) => {
-        setSearchStr(ev.target.value);
-    };
+  const onSearch = async ({q, searchOption}) => {
+    
 
-    const onSearch = async (ev) => {
-        ev.preventDefault();
+    try {
+      setApiDataError(null);
 
-    try{
-        setApiDataError(null);
-        const result = await searchForShows(searchStr);
-        setApiData(result);
-    }catch (error){
-        setApiDataError(error);
+      let result;
+
+      if(searchOption === 'shows'){
+       result = await searchForShows(q);
+      }else{
+         result = await searchForPeople(q);  
+      }
+
+      setApiData(result)
+    } catch (error) {
+      setApiDataError(error);
     }
+  };
+
+  const renderApiData = () => {
+    if (apiDataError) {
+      return <div>Error occured: {apiDataError.message}</div>;
+    }
+    if (apiData?.length === 0){
+        return <div>No Results</div>;
     }
 
-    const renderApiData = () => {
-        if(apiDataError){
-            return <div>Error occured: {apiDataError.message}</div>
-        }
+    if (apiData) {
+        return apiData[0].show ? (<ShowGrid shows = {apiData}/>)
+         : (<ActorGrid actors = {apiData}/>);
+    }
+    return null;
+  };
 
+  return (
+    <div>
+        <SearchForm onSearch = {onSearch}/>
 
-        if (apiData) {
-            return apiData.map((data) => (
-                <div key = {data.show.id} > {data.show.name}</div>
-                ));
-        };
-         return null;
-    };
-
-    return(
-        <div>
-           <form onSubmit={onSearch}>
-           <input type = "text" value={searchStr} onChange = {onSearchInputChange}/>
-           <button type = "submit">Search</button>
-           </form>
-
-           <div> {renderApiData()}</div>
-        </div>
-    );
+      <div> {renderApiData()}</div>
+    </div>
+  );
 };
- 
+
 export default Home;
