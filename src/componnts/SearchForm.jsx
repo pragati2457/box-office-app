@@ -12,7 +12,7 @@ const SearchForm =  ({onSearch}) => {
         setSearchOption(ev.target.value);
       };
 
-      const onSubmit = (ev) => {
+      const onSubmit = ev => {
         ev.preventDefault();
 
         const options = {

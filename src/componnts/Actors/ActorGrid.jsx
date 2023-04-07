@@ -1,22 +1,27 @@
 import ActorCard from "./ActorCard";
 
-const ActorGrid = ({actors}) =>{
-    return (
-        <div>
-        {actors.map(data => {
+const ActorGrid = ({ actors }) => {
+  return (
+    <div>
+      {actors.map(data => {
+        return (
           <ActorCard
-          key = {data.show.id} 
-          name= {data.show.name} 
-          country = {data.person.country ? data.person.country.name : null}
-          birthday= {data.person.birthday}
-          deathday = {data.person.deathday}
-          gender = {data.person.gender}
-          image = {data.person.image ? data.person.image.medium 
-            : '/public/image-not-found.png'}
+            key={data.person.id}
+            name={data.person.name}
+            country={data.person.country ? data.person.country.name : null}
+            birthday={data.person.birthday}
+            deathday={data.person.deathday}
+            gender={data.person.gender}
+            image={
+              data.person.image
+                ? data.person.image.medium
+                : '/public/image-not-found.png'
+            }
           />
-        })}
-      </div>
-    )
-}
+        );
+      })}
+    </div>
+  );
+};
 
 export default ActorGrid ;
