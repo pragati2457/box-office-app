@@ -12,4 +12,11 @@ export const searchForShows = query => apiGet(`/search/shows?q=${query}`);
 export const searchForPeople = query => apiGet(`/search/people?q=${query}`);
 
 export const getShowById =  showId =>
- apiGet(`/shows/${showId}?embed[]=seasons&embed[]=cast`);
+ apiGet(`/shows/${showId}?embed[]=season&embed[]=cast`);
+
+ export const getShowsByIds = async showIds => {
+  const promises = showIds.map(showId => apiGet(`/shows/${showId}`));
+
+ return Promise.all(promises);
+
+ }

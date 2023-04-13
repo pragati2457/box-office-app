@@ -9,7 +9,7 @@ const Cast = ({ cast } ) => {
                     src = {
                         person.image 
                         ? person.image.medium 
-                        : '/public/image-not-found.png'
+                        : '/image-not-found.png'
                         }
                         />
                     </div>
