@@ -5,20 +5,20 @@ const ShowGrid = ({ shows }) => {
 
  const [starredShows, dispatchStarred]= useStarredShows()
 
-  const onStarMeClick = showwId => {
-    const isStarred = starredShows.includes(showwId);
+ const onStarMeClick = showwId => {
+  const isStarred = starredShows.includes(showwId);
 
-    if(isStarred){
-      dispatchStarred({ type: 'UNSTAR', showwId});
-    } else {
-      dispatchStarred({ type: 'STAR', showwId});
-    }
+  if(isStarred){
+    dispatchStarred({ type: 'UNSTAR', showId: showwId });
+  } else {
+    dispatchStarred({ type: 'STAR', showId: showwId });
   }
+}
 
   return (
     <div>
       {shows.map(data => {
-        
+        return(
           <ShowCard
             key={data.show.id}
             id={data.show.id}
@@ -32,7 +32,7 @@ const ShowGrid = ({ shows }) => {
             onStarMeClick={onStarMeClick}
             isStarred={starredShows.includes(data.show.id)}
           />
-       
+        )
       })}
     </div>
   );
