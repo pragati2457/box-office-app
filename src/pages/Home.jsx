@@ -4,6 +4,7 @@ import { searchForShows, searchForPeople} from './../API/tvmaze';
 import SearchForm from '../componnts/SearchForm';
 import ShowGrid from '../componnts/Shows/ShowGrid';
 import ActorGrid from '../componnts/Actors/ActorGrid';
+import { TextCenter } from '../componnts/common/TextCenter';
 
 const Home = () => {
 
@@ -28,10 +29,10 @@ const Home = () => {
 
   const renderApiData = () => {
     if (apiDataError) {
-      return <div>Error occured: {apiDataError.message}</div>;
+      return <TextCenter>Error occured: {apiDataError.message}</TextCenter>;
     }
     if (apiData?.length === 0){
-        return <div>No Results</div>;
+        return <TextCenter>No Results</TextCenter>;
     }
 
     if (apiData) {

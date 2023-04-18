@@ -5,7 +5,7 @@ import Navs from './Navs';
 const MainLayout = () => {
   return (
     <div>
-      This is shared markup
+      
       <Navs />
       <AppTitle />
       <Outlet />
