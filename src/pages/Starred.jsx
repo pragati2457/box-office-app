@@ -10,7 +10,7 @@ const Starred = () => {
 
   const {data: starredShows, error: starredShowsError} = useQuery({
     queryKey : ['starred', starredShowsIds],
-    queryFn: async () => getShowsByIds(starredShowsIds).then(result =>
+    queryFn:  () => getShowsByIds(starredShowsIds).then(result =>
       result.map(show => ({show}))),
       refetchOnWindowFocus: false,
   });
